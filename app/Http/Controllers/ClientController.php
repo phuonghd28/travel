@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     public function home() {
-        $types = Article::query()->where('type_id', 1)->limit(3)->get();
-        $last_type = Article::query()->where('type_id', 2)->first();
+        $types = Type::all();
         $query = Article::query();
         $articles = $query->orderBy('created_at', 'DESC')->limit(3)->get();
-        return view('clients.index', ['type' => $types, 'articles' => $articles, 'lastType' => $last_type]);
+        return view('clients.index', ['type' => $types, 'articles' => $articles]);
     }
 
     public function list(Request $request) {
